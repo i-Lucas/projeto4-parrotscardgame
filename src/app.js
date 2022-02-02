@@ -1,23 +1,23 @@
-const verificar = (numero) => numero < 4 || numero > 14 ? true : false
-const par = (numero) => numero % 2 === 0 ? true : false // par retorna true
+const Verificacao = (numero) => Validar(numero) === 'valido' && ParoImpar(numero) === 'par' ? true : false
+const Validar = (numero) => numero < 4 || numero > 14 ? 'invalido' : 'valido'
+const ParoImpar = (numero) => numero % 2 === 0 ? 'par' : 'impar'
 
-const numeroDeCartas = prompt('Quantas cartas ?')
-const condicao = false
+let condicao = false
 
-seila(numeroDeCartas)
+Inicio()
 
-function seila(numero) {    
+function Inicio() {
 
-    while(condicao == false) {
-   
-        if(verificar(numero) == false && par(numero) == true ) { // true tru
-            
-            alert('DEU CERTO')
-            condicao = true
+    while (condicao == false) {
+
+        let numeroDeCartas = prompt('Quantas cartas ?')
+
+        if (Verificacao(numeroDeCartas)) {
+            condicao = true;
         }
-        else 
-        alert('DEU ERRADO')
-        condicao = false
+
+        console.log(condicao)
+
     }
 }
 
