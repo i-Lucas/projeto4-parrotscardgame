@@ -35,7 +35,7 @@ header h1 {
     /* background-color: red; */
 }
 
-.card {
+/* .card {
 
     width: 117px;
     height: 146px;
@@ -45,7 +45,7 @@ header h1 {
 
     margin-left: 34px;
     margin-bottom: 34px;
-}
+} */
 
 /* @media (max-width: 600px) {
 
@@ -54,3 +54,52 @@ header h1 {
         max-width: 368px;
     }
 } */
+
+/* --------------------------------------------------------- */
+
+.card {
+    width: 117px;
+    height: 146px;
+    position: relative;
+
+    margin-left: 34px;
+    margin-bottom: 34px;
+  }
+
+  .face {
+    width: 100%;
+    height: 100%;
+    background-color: #A7E9AF;
+    border-radius: 10px;
+    box-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    backface-visibility: hidden;
+    transition: all .5s;
+    transform-style: preserve-3d;
+  }
+
+  .back-face {
+    transform: rotateY(180deg);
+  }
+
+  .card:hover .back-face {
+    transform: rotateY(0deg);
+  }
+
+  .card:hover .front-face {
+    transform: rotateY(-180deg);
+  }
+
+  /* ------------------------ */
+
+  .hidden {
+    display: none;
+  }
+
+  img {
+    width: 50px;
+    height: 50px;
+  }
