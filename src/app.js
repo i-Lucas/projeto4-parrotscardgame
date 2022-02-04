@@ -11,7 +11,7 @@ let condicao = false;
 let arrayCartas = [];
 
 // cronômetro
-const cronometro = document.querySelector('.cronometro')
+let cronometro = document.querySelector('.cronometro')
 let intervalo = null;
 
 // estatísticas
@@ -20,6 +20,9 @@ let totalJogadas = 0;
 
 // verificar o fim do jogo
 let CartasProFim = undefined;
+
+// verificar movimentos mínimos (especial)
+let movimentosMinimos = undefined;
 
 // após todos elementos do DOM serem carregados
 window.onload = () => {
@@ -45,6 +48,8 @@ window.onload = () => {
 
     // para verificar quantas cartas faltam pro jogo acabar
     CartasProFim = numero;
+    // obtém o mínimo de movimentos necessários para terminar o jogo (especial)
+    movimentosMinimos = cartas;
 
     // preenchendo o array com as cartas
     for (let i = 0; i < cartas; i++) {
@@ -82,8 +87,9 @@ window.onload = () => {
   HabilitarCartas()
 
   function Embaralhar(cartas) {
-    
+
     // console.log('Embaralhar Chamado')
+    cronometro.innerHTML += 0
     IniciarCronometro()
 
     cartas.forEach(cartas => {
@@ -122,7 +128,7 @@ window.onload = () => {
     }
 
     console.log('Jogadas ++')
-    totalJogadas ++
+    totalJogadas++
   }
 
   function DesabilitarCartas() {
@@ -153,6 +159,24 @@ window.onload = () => {
     [primeiraCarta, segundaCarta] = [null, null];
   }
 
+  function VerificarFimDoJogo() {
+    // console.log('VerificarFimDoJogo Chamado')
+
+    if (CartasProFim === 0) {
+      // especial
+      if (totalJogadas === movimentosMinimos) {
+        const h1 = document.querySelector('h1')
+        h1.innerHTML = `VOCÊ É O CARA !!!`
+        SoltarRojao()
+        PararCronometro()
+
+      }
+      else
+        BaterPalmas()
+      PararCronometro()
+    }
+  }
+
   // cronômetro
   function IniciarCronometro() {
     intervalo = setInterval(AtualizarCronometro, 1000)
@@ -166,16 +190,27 @@ window.onload = () => {
     clearInterval(intervalo)
   }
 
-  function VerificarFimDoJogo() {
-    // console.log('VerificarFimDoJogo Chamado')
-    if (CartasProFim === 0) {
-      PararCronometro()
-      alert(`Você ganhou em ${totalJogadas} jogadas!`)
-      let resposta = prompt(`Fim do jogo ! Você terminou em ${tempoTotal} segundos ! Deseja jogar novamente ? (sim ou não)`)
-      if (resposta === 'sim' || resposta === 'Sim' || resposta === 'SIM') {
-        // Recarrega a página atual sem usar o cache
-        document.location.reload(true);
-      }
+  function BaterPalmas() {
+    const pag = document.querySelector('head')
+    pag.innerHTML += `<audio src="ogg/palmas.ogg" autoplay>`
+    // pra dar tempo do som tocar !
+    setTimeout(MostrarResultados, 800)
+  }
+
+  function SoltarRojao() {
+    const pag = document.querySelector('head')
+    pag.innerHTML += `<audio src="ogg/fogos.ogg" autoplay>`
+    // pra dar tempo do som tocar !
+    setTimeout(MostrarResultados, 2500)
+  }
+
+  function MostrarResultados() {
+    alert(`Você ganhou em ${totalJogadas} jogadas!`)
+    let resposta = prompt(`Fim do jogo ! Você terminou em ${tempoTotal} segundos ! Deseja jogar novamente ? (sim ou não)`)
+    if (resposta === 'sim' || resposta === 'Sim' || resposta === 'SIM') {
+      // Recarrega a página atual sem usar o cache
+      document.location.reload(true);
     }
   }
+
 }
