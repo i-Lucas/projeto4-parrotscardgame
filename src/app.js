@@ -40,7 +40,7 @@ window.onload = () => {
 
   function MontarCartas(numero) {
 
-    let identificador = ['html5', 'css', 'js', 'csharp', 'python', 'typescript', 'php']
+    let identificador = ['html5', 'css', 'JS', 'csharp', 'python', 'typescript', 'php']
     let cartas = numero / 2; // by Felipe hehe
 
     // para verificar quantas cartas faltam pro jogo acabar
