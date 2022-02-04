@@ -86,6 +86,11 @@ ion-icon {
   margin-right: 10px;
 }
 
+img {
+  max-width: 117px;
+  max-height: 146px;
+}
+
 @media (max-width: 600px) {
 
   header h1 {

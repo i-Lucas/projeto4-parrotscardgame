@@ -90,7 +90,8 @@ window.onload = () => {
 
     // console.log('Embaralhar Chamado')
     cronometro.innerHTML += 0
-    IniciarCronometro()
+    // iniciando o cronômetro
+    intervalo = setInterval(AtualizarCronometro, 1000)   
 
     cartas.forEach(cartas => {
       cartas.style.order = Math.floor(Math.random() * 12);
@@ -163,38 +164,30 @@ window.onload = () => {
     // console.log('VerificarFimDoJogo Chamado')
 
     if (CartasProFim === 0) {
-      // especial
-      if (totalJogadas === movimentosMinimos) {
+      // é preciso ganhar sem errar nenhum movimento com no mínimo 8 cartas para liberar o especial
+      if (totalJogadas >= 4 && totalJogadas === movimentosMinimos) {
         const h1 = document.querySelector('h1')
-        h1.innerHTML = `VOCÊ É O CARA !!!`
+        h1.innerHTML = `PARABÉNS !!!`
         SoltarRojao()
-        PararCronometro()
-
+        clearInterval(intervalo)
       }
       else
         BaterPalmas()
-      PararCronometro()
+        clearInterval(intervalo)
     }
   }
 
-  // cronômetro
-  function IniciarCronometro() {
-    intervalo = setInterval(AtualizarCronometro, 1000)
-  }
   function AtualizarCronometro() {
     VerificarFimDoJogo()
     cronometro.innerHTML = parseInt(cronometro.innerHTML) + 1
     tempoTotal++;
-  }
-  function PararCronometro() {
-    clearInterval(intervalo)
   }
 
   function BaterPalmas() {
     const pag = document.querySelector('head')
     pag.innerHTML += `<audio src="ogg/palmas.ogg" autoplay>`
     // pra dar tempo do som tocar !
-    setTimeout(MostrarResultados, 800)
+    setTimeout(MostrarResultados, 2500)
   }
 
   function SoltarRojao() {
@@ -206,11 +199,21 @@ window.onload = () => {
 
   function MostrarResultados() {
     alert(`Você ganhou em ${totalJogadas} jogadas!`)
-    let resposta = prompt(`Fim do jogo ! Você terminou em ${tempoTotal} segundos ! Deseja jogar novamente ? (sim ou não)`)
-    if (resposta === 'sim' || resposta === 'Sim' || resposta === 'SIM') {
-      // Recarrega a página atual sem usar o cache
-      document.location.reload(true);
+    let resposta = prompt(`Fim do jogo ! Você terminou em ${tempoTotal} segundos ! Deseja jogar novamente ? digite [sim ou nao]`).toUpperCase();
+    let respondeu = false;
+
+    while (respondeu == false) {
+      if (resposta == 'SIM') {
+        respondeu = true;
+        // Recarrega a página atual sem usar o cache
+        return document.location.reload(true);
+      } else if (resposta == 'NAO') {
+        return undefined
+      }
+      resposta = prompt(`Deseja jogar novamente ? responda [sim ou nao]`).toUpperCase();
     }
   }
 
+
 }
+
