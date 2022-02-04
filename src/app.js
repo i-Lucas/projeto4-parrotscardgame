@@ -13,7 +13,10 @@ let arrayCartas = [];
 // cronômetro
 const cronometro = document.querySelector('.cronometro')
 let intervalo = null;
+
+// estatísticas
 let tempoTotal = 0;
+let totalJogadas = 0;
 
 // verificar o fim do jogo
 let CartasProFim = undefined;
@@ -117,6 +120,9 @@ window.onload = () => {
     else {
       DesvirarCarta();
     }
+
+    console.log('Jogadas ++')
+    totalJogadas ++
   }
 
   function DesabilitarCartas() {
@@ -164,7 +170,8 @@ window.onload = () => {
     // console.log('VerificarFimDoJogo Chamado')
     if (CartasProFim === 0) {
       PararCronometro()
-      let resposta = prompt(`Fim do jogo ! Você terminou em ${tempoTotal} segundos ! Deseja jogar novamente ?`)
+      alert(`Você ganhou em ${totalJogadas} jogadas!`)
+      let resposta = prompt(`Fim do jogo ! Você terminou em ${tempoTotal} segundos ! Deseja jogar novamente ? (sim ou não)`)
       if (resposta === 'sim' || resposta === 'Sim' || resposta === 'SIM') {
         // Recarrega a página atual sem usar o cache
         document.location.reload(true);

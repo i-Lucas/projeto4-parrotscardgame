@@ -75,6 +75,10 @@ header h1 {
   transform: rotateY(180deg);
 }
 
+.cronometro {
+  color: red;
+}
+
 @media (max-width: 600px) {
 
   header h1 {
