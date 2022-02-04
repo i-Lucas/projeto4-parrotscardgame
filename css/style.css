@@ -1,10 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap');
 
 * {
+  padding: 0;
+  margin: 0;
   box-sizing: border-box;
+  align-items: center;
 }
 
 body {
+  height: 100vh;
   background-color: #EEF9BF;
 }
 
@@ -22,109 +26,61 @@ header h1 {
   font-size: 56px;
   line-height: 66px;
   letter-spacing: -0.004em;
-
   color: #75B79E;
 }
 
-.card-container {
-
+.memory-game {
   display: flex;
   flex-wrap: wrap;
   margin: 0px 100px 0px 100px;
-  margin-top: 100px;
-  /* background-color: red; */
+  margin-top: 50px;
 }
 
-/* .card {
-
-    width: 117px;
-    height: 146px;
-    background: #A7E9AF;
-    border: 1px solid #99CEA8;
-    border-radius: 5px;
-
-    margin-left: 34px;
-    margin-bottom: 34px;
-} */
-
-/* @media (max-width: 600px) {
-
-    .card-container {
-        align-items: center;
-        max-width: 368px;
-    }
-} */
-
-/* --------------------------------------------------------- */
-
-.card {
+.memory-card {
   width: 117px;
   height: 146px;
   position: relative;
 
   margin-left: 34px;
   margin-bottom: 34px;
-}
 
-.face {
-  width: 100%;
-  height: 100%;
-  background-color: #A7E9AF;
-  border-radius: 10px;
-  box-shadow: 1px 1px 1px rgba(0, 0, 0, .3);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: absolute;
-  backface-visibility: hidden;
-  transition: all .5s;
+  transform: scale(1);
   transform-style: preserve-3d;
+  transition: transform .5s;
 }
 
-.back-face {
+.memory-card:active {
+  transform: scale(0.97);
+  transition: transform .2s;
+}
+
+.memory-card.flip {
   transform: rotateY(180deg);
 }
 
-.card:hover .back-face {
-  transform: rotateY(0deg);
+.front-face, .back-face {
+
+  width: 117px;
+  height: 146px;
+  padding: 20px;
+  position: absolute;
+  background-color: #A7E9AF;
+  border: 1px solid #99CEA8;
+  box-sizing: border-box;
+  border-radius: 5px;
+  backface-visibility: hidden;
 }
 
-.card:hover .front-face {
-  transform: rotateY(-180deg);
+.front-face {
+  transform: rotateY(180deg);
 }
 
-/* ------------------------ */
+@media (max-width: 600px) {
 
-.hidden {
-  display: none;
-}
-
-/* cores */
-
-.Amarelo {
-  background-color: yellow;
-}
-
-.Vermelho {
-  background-color: red;
-}
-
-.Azul {
-  background-color: blue;
-}
-
-.Rosa {
-  background-color: pink;
-}
-
-.Verde {
-  background-color: green;
-}
-
-.Laranja {
-  background-color: orange;
-}
-
-.Cinza {
-  background-color: gray;
+  header h1 {
+    /* margin-top: 40px; */
+    margin-left: 12px;
+    margin-right: 12px;
+    font-size: 36px;
+  }
 }
