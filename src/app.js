@@ -1,6 +1,4 @@
-const Verificacao = (numero) => Validar(numero) === 'valido' && ParoImpar(numero) === 'par' ? true : false;
-const Validar = (numero) => numero < 4 || numero > 14 ? 'invalido' : 'valido';
-const ParoImpar = (numero) => numero % 2 === 0 ? 'par' : 'impar';
+const check = (n) => n % 2 != 0 || n > 14 || n < 4 ? true : false
 
 let condicao = false;
 let arrayCartas = [];
@@ -25,7 +23,7 @@ window.onload = () => {
     while (condicao == false) {
       let numero = prompt('Com quantas cartas queres jogar ? [Min: 4 Max: 14]')
 
-      if (Verificacao(numero)) {
+      if (!check(numero)) {
         MontarCartas(numero)
         condicao = true;
       }
