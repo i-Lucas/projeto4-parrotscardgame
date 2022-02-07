@@ -1,33 +1,31 @@
-const check = (n) => n % 2 != 0 || n > 14 || n < 4 ? true : false
-
-let condicao = false;
-let arrayCartas = [];
+const check = (n) => n % 2 != 0 || n > max || n < min ? true : false
 
 // cronômetro
 let cronometro = document.querySelector('.cronometro')
 let intervalo = null;
 
 // estatísticas
-let tempoTotal = 0;
-let totalJogadas = 0;
+let tempoTotal = 0, totalJogadas = 0;
 
 // verificar movimentos mínimos (especial)
-let movimentosMinimos = undefined;
-let CartasProFim = undefined;
+let movimentosMinimos = 0, CartasProFim = 0; 
+
+// cartas
+let arrayCartas = [];
+let min = 4, max = 14
+
+let msg = `Com quantas cartas queres jogar ? [Min: ${min} Max: ${max}]`
 
 window.onload = () => {
 
   ObterCartas()
   function ObterCartas() {
 
-    while (condicao == false) {
-      let numero = prompt('Com quantas cartas queres jogar ? [Min: 4 Max: 14]')
-
-      if (!check(numero)) {
-        MontarCartas(numero)
-        condicao = true;
-      }
+    let numero = prompt(msg)
+    while (check(numero)) {
+      numero = prompt(msg)
     }
+    MontarCartas(numero)
   }
 
   function MontarCartas(numero) {
@@ -59,8 +57,7 @@ window.onload = () => {
     }
   }
 
-  let naoPodeVirar = false;
-  let cartaVirada = false;
+  let naoPodeVirar = false, cartaVirada = false;
   let primeiraCarta, segundaCarta;
 
   const cartas = document.querySelectorAll('.memory-card');
@@ -147,7 +144,7 @@ window.onload = () => {
       }
       else
         BaterPalmas()
-        clearInterval(intervalo)
+      clearInterval(intervalo)
     }
   }
 
